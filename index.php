@@ -286,25 +286,38 @@ include __DIR__ . '/includes/header.php';
             </p>
         </div>
         
-        <div class="skills-container">
-            <?php foreach ($skillsByCategory as $category => $skills): ?>
-                <div class="skills-category reveal">
-                    <h3 class="skills-category-title"><?php echo e($category); ?></h3>
-                    <div class="skills-grid">
-                        <?php foreach ($skills as $skill): ?>
-                            <div class="skill-item">
-                                <div class="skill-info">
-                                    <span class="skill-name"><?php echo e($skill['name']); ?></span>
-                                    <span class="skill-level"><?php echo $skill['proficiency']; ?>%</span>
-                                </div>
-                                <div class="skill-bar">
-                                    <div class="skill-progress" style="width: <?php echo $skill['proficiency']; ?>%"></div>
-                                </div>
-                            </div>
-                        <?php endforeach; ?>
+        <div class="skills-cards-grid">
+            <?php 
+            $displayCount = 0;
+            $maxDisplay = 6;
+            foreach ($skillsByCategory as $category => $skills): 
+                foreach ($skills as $skill): 
+                    if ($displayCount >= $maxDisplay) break 2;
+                    $displayCount++;
+            ?>
+                <div class="skill-card reveal" style="transition-delay: <?php echo ($displayCount - 1) * 50; ?>ms">
+                    <div class="skill-card-header">
+                        <span class="skill-card-category"><?php echo e($category); ?></span>
+                        <span class="skill-card-percent"><?php echo $skill['proficiency']; ?>%</span>
+                    </div>
+                    <h3 class="skill-card-name"><?php echo e($skill['name']); ?></h3>
+                    <div class="skill-card-bar">
+                        <div class="skill-card-progress" style="width: 0%" data-width="<?php echo $skill['proficiency']; ?>"></div>
                     </div>
                 </div>
-            <?php endforeach; ?>
+            <?php 
+                endforeach;
+            endforeach; 
+            ?>
+        </div>
+        
+        <div style="text-align: center; margin-top: var(--space-10);">
+            <a href="<?php echo SITE_URL; ?>/pages/skills.php" class="btn btn-secondary btn-lg">
+                View All Skills
+                <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M5 12h14M12 5l7 7-7 7"/>
+                </svg>
+            </a>
         </div>
     </div>
 </section>

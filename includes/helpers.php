@@ -258,6 +258,11 @@ function handleUpload(array $file, string $destination = UPLOAD_PATH): string|fa
         return false;
     }
     
+    // Create upload directory if it doesn't exist
+    if (!is_dir($destination)) {
+        mkdir($destination, 0755, true);
+    }
+    
     $filename = generateUniqueFilename($file['name']);
     $filepath = $destination . $filename;
     

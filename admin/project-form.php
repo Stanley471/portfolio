@@ -3,6 +3,7 @@
  * Admin Project Form (Add/Edit)
  */
 
+require_once __DIR__ . '/../includes/helpers.php';
 require_once __DIR__ . '/../includes/models/Project.php';
 
 $pageTitle = 'Add Project';

@@ -91,8 +91,13 @@ $currentPage = basename($_SERVER['PHP_SELF'], '.php');
                     </a>
                 </li>
                 <li class="nav-item">
+                    <a href="<?php echo SITE_URL; ?>/pages/skills.php" class="nav-link <?php echo $currentPage === 'skills' ? 'active' : ''; ?>">
+                        <span class="nav-number">03</span> Skills
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a href="<?php echo SITE_URL; ?>/pages/contact.php" class="nav-link <?php echo $currentPage === 'contact' ? 'active' : ''; ?>">
-                        <span class="nav-number">03</span> Contact
+                        <span class="nav-number">04</span> Contact
                     </a>
                 </li>
                 <li class="nav-item nav-item-highlight">

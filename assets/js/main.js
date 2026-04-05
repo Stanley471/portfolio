@@ -143,29 +143,56 @@ function initRevealAnimations() {
  * Skills Animation - Animate skill bars when scrolled into view
  */
 function initSkillsAnimation() {
-    const skillBars = document.querySelectorAll('.skill-progress');
+    // Home page skill cards
+    const skillCards = document.querySelectorAll('.skill-card');
     
-    const skillsObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
+    const cardsObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry, index) => {
             if (entry.isIntersecting) {
-                const bar = entry.target;
-                const width = bar.style.width;
+                const card = entry.target;
+                const progressBar = card.querySelector('.skill-card-progress');
                 
-                // Reset width to 0 then animate to target
-                bar.style.width = '0%';
-                setTimeout(() => {
-                    bar.style.width = width;
-                }, 100);
+                if (progressBar) {
+                    const targetWidth = progressBar.dataset.width;
+                    // Staggered animation
+                    setTimeout(() => {
+                        progressBar.style.width = targetWidth + '%';
+                    }, index * 100);
+                }
                 
-                skillsObserver.unobserve(bar);
+                cardsObserver.unobserve(card);
             }
         });
     }, {
-        threshold: 0.5
+        threshold: 0.2
     });
     
-    skillBars.forEach(bar => {
-        skillsObserver.observe(bar);
+    skillCards.forEach(card => {
+        cardsObserver.observe(card);
+    });
+    
+    // Skills page skill cards (full list)
+    const skillsPageBars = document.querySelectorAll('.skill-card-progress[data-width]');
+    
+    const pageObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry, index) => {
+            if (entry.isIntersecting) {
+                const bar = entry.target;
+                const targetWidth = bar.dataset.width;
+                
+                setTimeout(() => {
+                    bar.style.width = targetWidth + '%';
+                }, (index % 4) * 100);
+                
+                pageObserver.unobserve(bar);
+            }
+        });
+    }, {
+        threshold: 0.2
+    });
+    
+    skillsPageBars.forEach(bar => {
+        pageObserver.observe(bar);
     });
 }
 

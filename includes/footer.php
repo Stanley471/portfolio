@@ -20,6 +20,7 @@
                     <ul class="footer-list">
                         <li><a href="<?php echo SITE_URL; ?>/">Home</a></li>
                         <li><a href="<?php echo SITE_URL; ?>/pages/projects.php">Projects</a></li>
+                        <li><a href="<?php echo SITE_URL; ?>/pages/skills.php">Skills</a></li>
                         <li><a href="<?php echo SITE_URL; ?>/pages/contact.php">Contact</a></li>
                     </ul>
                 </div>
